@@ -8,9 +8,9 @@
 */
 
 body {
-  background: #FFFFFF;
+  background: #F2F2F2;
   color: #1A1A1A;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-noto-serif-tc), '新細明體', 'PMingLiU', Georgia, serif;
 }
 
 .markdown-content {

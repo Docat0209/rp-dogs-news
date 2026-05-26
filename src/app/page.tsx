@@ -1,8 +1,9 @@
-import { getAllPosts } from '@/lib/posts'
+import { getPostsByPage } from '@/lib/posts'
 import NewsCard from '@/components/NewsCard'
+import Pagination from '@/components/Pagination'
 
 export default function HomePage() {
-  const posts = getAllPosts()
+  const { posts, totalPages } = getPostsByPage(1)
   const [latest, ...rest] = posts
 
   return (
@@ -25,9 +26,9 @@ export default function HomePage() {
       {rest.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-1 h-5 bg-[#9B1C1C]" />
-            <h2 className="text-sm font-bold tracking-widest text-[#111111] uppercase">更多新聞</h2>
-            <div className="flex-1 h-px bg-gray-200" />
+            <div className="w-1 h-5 bg-[#CC0000]" />
+            <h2 className="text-sm font-bold tracking-widest text-[#1A1A1A] uppercase">更多新聞</h2>
+            <div className="flex-1 h-px bg-gray-300" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map(post => (
@@ -36,6 +37,7 @@ export default function HomePage() {
           </div>
         </section>
       )}
+      <Pagination currentPage={1} totalPages={totalPages} />
     </div>
   )
 }
