@@ -24,10 +24,9 @@ export default function HomePage() {
       {/* Remaining articles — grid */}
       {rest.length > 0 && (
         <section>
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-1 h-5 bg-[#9B1C1C]" />
-            <h2 className="text-sm font-bold tracking-widest text-[#111111] uppercase">更多新聞</h2>
-            <div className="flex-1 h-px bg-gray-200" />
+          <div className="flex items-center gap-0 mb-6 -mx-4 px-4 bg-[#1A1A1A] py-2.5">
+            <div className="w-1 h-4 bg-[#CC0000] mr-3 shrink-0" />
+            <h2 className="text-xs font-bold tracking-widest text-white uppercase">更多新聞</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {rest.map(post => (

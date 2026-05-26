@@ -44,7 +44,7 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Article header */}
       <header className="mb-8">
-        <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-1 mb-4 tracking-wide">
+        <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-1 mb-4 tracking-wide shadow-sm">
           {post.category}
         </span>
         <h1 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] leading-tight mb-4">

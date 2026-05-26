@@ -14,7 +14,7 @@ export default function NewsCard({ post, featured = false }: NewsCardProps) {
   if (featured) {
     return (
       <Link href={`/news/${post.slug}`} className="group block">
-        <article className="grid md:grid-cols-2 gap-0 border border-gray-200 hover:border-[#CC0000] transition-colors">
+        <article className="grid md:grid-cols-2 gap-0 border border-gray-200 hover:border-[#CC0000] shadow-sm hover:shadow-md transition-all duration-200">
           <div className="relative aspect-video md:aspect-auto md:min-h-[300px] bg-gray-100 overflow-hidden">
             {post.cover ? (
               <Image
@@ -36,7 +36,7 @@ export default function NewsCard({ post, featured = false }: NewsCardProps) {
             )}
           </div>
           <div className="p-6 flex flex-col justify-center bg-white">
-            <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-1 mb-3 w-fit tracking-wide">
+            <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-1 mb-3 w-fit tracking-wide shadow-sm">
               {post.category}
             </span>
             <h2 className="text-2xl font-bold text-[#1A1A1A] leading-tight mb-3 group-hover:text-[#CC0000] transition-colors">
@@ -56,7 +56,7 @@ export default function NewsCard({ post, featured = false }: NewsCardProps) {
 
   return (
     <Link href={`/news/${post.slug}`} className="group block h-full">
-      <article className="border border-gray-200 hover:border-[#CC0000] transition-colors h-full flex flex-col bg-white">
+      <article className="border border-gray-200 hover:border-[#CC0000] shadow-sm hover:shadow-md transition-all duration-200 h-full flex flex-col bg-white">
         <div className="relative aspect-video bg-gray-100 overflow-hidden">
           {post.cover ? (
             <Image
@@ -78,7 +78,7 @@ export default function NewsCard({ post, featured = false }: NewsCardProps) {
           )}
         </div>
         <div className="p-4 flex flex-col flex-1">
-          <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-0.5 mb-2 w-fit tracking-wide">
+          <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-0.5 mb-2 w-fit tracking-wide shadow-sm">
             {post.category}
           </span>
           <h3 className="text-base font-bold text-[#1A1A1A] leading-tight mb-2 group-hover:text-[#CC0000] transition-colors">
