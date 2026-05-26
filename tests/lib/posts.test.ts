@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import fs from 'fs'
 import path from 'path'
+import matter from 'gray-matter'
+import { formatPostDate } from '@/lib/posts'
 
 const FIXTURE_DIR = path.join(process.cwd(), 'tests', 'fixtures', 'news')
 
@@ -32,7 +34,6 @@ describe('getAllPosts', () => {
   })
 
   it('parses frontmatter correctly', () => {
-    const matter = require('gray-matter')
     const content = fs.readFileSync(path.join(FIXTURE_DIR, 'test-article.md'), 'utf8')
     const { data } = matter(content)
     expect(data.title).toBe('測試文章')
@@ -48,9 +49,30 @@ describe('getPost', () => {
   })
 
   it('returns post content from markdown file', () => {
-    const matter = require('gray-matter')
     const fullPath = path.join(FIXTURE_DIR, 'test-article.md')
     const { content } = matter(fs.readFileSync(fullPath, 'utf8'))
     expect(content.trim()).toBe('正文內容在這裡。')
+  })
+})
+
+describe('formatPostDate', () => {
+  it('formats date-only string without time', () => {
+    expect(formatPostDate('2026-05-27')).toBe('2026年5月27日')
+  })
+
+  it('formats datetime string with HH:MM to minute precision', () => {
+    expect(formatPostDate('2026-05-27 09:15')).toBe('2026年5月27日 09:15')
+  })
+
+  it('pads single-digit hour and minute with leading zero', () => {
+    expect(formatPostDate('2026-01-03 08:05')).toBe('2026年1月3日 08:05')
+  })
+
+  it('handles midnight time correctly', () => {
+    expect(formatPostDate('2026-12-31 00:00')).toBe('2026年12月31日 00:00')
+  })
+
+  it('handles late-night time correctly', () => {
+    expect(formatPostDate('2026-05-26 22:48')).toBe('2026年5月26日 22:48')
   })
 })

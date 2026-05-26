@@ -1,4 +1,4 @@
-import { getPost, getAllSlugs } from '@/lib/posts'
+import { getPost, getAllSlugs, formatPostDate } from '@/lib/posts'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Image from 'next/image'
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost(slug)
   if (!post) return {}
   return {
-    title: `${post.title} | DOG'S NEWS`,
+    title: `${post.title} | DOG'S NEWS 台島新聞局`,
     description: post.excerpt,
   }
 }
@@ -29,12 +29,7 @@ export default async function ArticlePage({ params }: Props) {
   const post = getPost(slug)
   if (!post) notFound()
 
-  const dateLabel = new Date(post.date + 'T00:00:00').toLocaleDateString('zh-TW', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    weekday: 'long',
-  })
+  const dateLabel = formatPostDate(post.date)
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
@@ -49,17 +44,18 @@ export default async function ArticlePage({ params }: Props) {
 
       {/* Article header */}
       <header className="mb-8">
-        <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-1 mb-4">
+        <span className="inline-block bg-[#CC0000] text-white text-xs font-bold px-2 py-1 mb-4 tracking-wide">
           {post.category}
         </span>
-        <h1 className="text-3xl md:text-4xl font-bold text-black leading-tight mb-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#1A1A1A] leading-tight mb-4">
           {post.title}
         </h1>
         <p className="text-lg text-gray-500 mb-4 leading-relaxed">{post.excerpt}</p>
-        <div className="flex items-center gap-3 text-sm text-gray-400 border-t border-b border-gray-200 py-3">
+        <div className="flex items-center gap-3 text-sm text-gray-400 border-t-2 border-b border-[#CC0000] border-b-gray-200 py-3">
           <span className="font-medium text-gray-700">{post.author}</span>
           <span>·</span>
           <time dateTime={post.date}>{dateLabel}</time>
+          <span>· 台島新聞局</span>
         </div>
       </header>
 
@@ -84,13 +80,20 @@ export default async function ArticlePage({ params }: Props) {
       </div>
 
       {/* Back link */}
-      <div className="mt-12 pt-6 border-t border-gray-200">
+      <div className="mt-12 pt-6 border-t border-gray-200 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-[#CC0000] hover:text-black transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-medium text-[#CC0000] hover:text-[#1A1A1A] transition-colors"
         >
           ← 返回首頁
         </Link>
+        <Image
+          src="/logo_trans.png"
+          alt="台島新聞局"
+          width={70}
+          height={30}
+          className="h-7 w-auto object-contain opacity-30"
+        />
       </div>
     </div>
   )
