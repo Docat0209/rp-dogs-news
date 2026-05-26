@@ -4,11 +4,11 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: "DOG'S NEWS | 虛構新聞局",
-  description: '虛構新聞局 — 角色扮演世界的最新新聞報導',
+  title: "DOG'S NEWS | 台島新聞局",
+  description: '台島新聞局 — 最新即時新聞報導',
   openGraph: {
-    title: "DOG'S NEWS",
-    description: '虛構新聞局 — 角色扮演世界的最新新聞報導',
+    title: "DOG'S NEWS 台島新聞局",
+    description: '台島新聞局 — 最新即時新聞報導',
     type: 'website',
   },
 }
