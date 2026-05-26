@@ -30,7 +30,7 @@ test('article page renders markdown content with minute-level timestamp', async 
   await expect(page.url()).toContain('/news/')
 
   // Category badge is visible
-  await expect(page.locator('.inline-block.bg-\\[\\#9B1C1C\\]').first()).toBeVisible()
+  await expect(page.locator('.inline-block.bg-\\[\\#CC0000\\]').first()).toBeVisible()
 
   // Timestamp contains 年 月 日 format (date) and HH:MM (time)
   const timeEl = page.locator('time').first()
