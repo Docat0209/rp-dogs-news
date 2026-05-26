@@ -6,9 +6,13 @@ export default function ClockWidget() {
   const [time, setTime] = useState<Date | null>(null)
 
   useEffect(() => {
-    setTime(new Date())
-    const id = setInterval(() => setTime(new Date()), 1000)
-    return () => clearInterval(id)
+    const tick = () => setTime(new Date())
+    const init = setTimeout(tick, 0)
+    const id = setInterval(tick, 1000)
+    return () => {
+      clearTimeout(init)
+      clearInterval(id)
+    }
   }, [])
 
   if (!time) return null
