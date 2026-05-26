@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import fs from 'fs'
 import path from 'path'
+import matter from 'gray-matter'
 import { formatPostDate } from '@/lib/posts'
 
 const FIXTURE_DIR = path.join(process.cwd(), 'tests', 'fixtures', 'news')
@@ -33,7 +34,6 @@ describe('getAllPosts', () => {
   })
 
   it('parses frontmatter correctly', () => {
-    const matter = require('gray-matter')
     const content = fs.readFileSync(path.join(FIXTURE_DIR, 'test-article.md'), 'utf8')
     const { data } = matter(content)
     expect(data.title).toBe('測試文章')
@@ -49,7 +49,6 @@ describe('getPost', () => {
   })
 
   it('returns post content from markdown file', () => {
-    const matter = require('gray-matter')
     const fullPath = path.join(FIXTURE_DIR, 'test-article.md')
     const { content } = matter(fs.readFileSync(fullPath, 'utf8'))
     expect(content.trim()).toBe('正文內容在這裡。')
