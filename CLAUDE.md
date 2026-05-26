@@ -66,8 +66,8 @@ src/
 
 ## Environments
 
-- Production: https://rp-dogs-news.vercel.app (待設定)
-- Staging: dev branch preview (待設定)
+- Production: https://rp-dogs-news.vercel.app
+- Staging: dev branch preview（push 到 dev 後 Vercel 自動生成 preview URL）
 
 ## 顏色配置
 
