@@ -6,9 +6,13 @@ test('homepage loads with logo and latest article', async ({ page }) => {
   // Page title
   await expect(page).toHaveTitle(/台島新聞局/)
 
-  // Header shows logo and Chinese name
+  // Header shows logo, Chinese name, and clock
   await expect(page.getByAltText('DOG\'S NEWS 台島新聞局').first()).toBeVisible()
   await expect(page.getByText('台島新聞局').first()).toBeVisible()
+  // Clock renders with HH:MM:SS pattern (font-mono tabular-nums element)
+  const clock = page.locator('span.font-mono')
+  await expect(clock).toBeVisible()
+  await expect(clock).toContainText(/\d{2}:\d{2}:\d{2}/)
 
   // Latest article card is rendered
   await expect(page.locator('article').first()).toBeVisible()

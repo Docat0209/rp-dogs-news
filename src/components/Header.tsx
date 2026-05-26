@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import ClockWidget from './ClockWidget'
 
 export default function Header() {
   return (
@@ -19,10 +20,7 @@ export default function Header() {
             <span className="text-[#CC0000] text-xs font-bold tracking-[0.25em] uppercase">DOGSNEWS</span>
           </div>
         </Link>
-        <div className="hidden md:flex items-center gap-2 text-xs text-gray-500 font-medium tracking-widest uppercase">
-          <span className="w-2 h-2 rounded-full bg-[#CC0000] animate-pulse" />
-          即時播報
-        </div>
+        <ClockWidget />
       </div>
     </header>
   )
