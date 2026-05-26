@@ -53,6 +53,15 @@ export function getPost(slug: string): Post | null {
   }
 }
 
+export const ARTICLES_PER_PAGE = 10
+
+export function getPostsByPage(page: number): { posts: PostMeta[]; totalPages: number } {
+  const all = getAllPosts()
+  const totalPages = Math.max(1, Math.ceil(all.length / ARTICLES_PER_PAGE))
+  const start = (page - 1) * ARTICLES_PER_PAGE
+  return { posts: all.slice(start, start + ARTICLES_PER_PAGE), totalPages }
+}
+
 export function getAllSlugs(): string[] {
   const files = fs.readdirSync(contentDir)
   return files.filter(f => f.endsWith('.md')).map(f => f.replace(/\.md$/, ''))

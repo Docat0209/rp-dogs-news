@@ -1,8 +1,9 @@
-import { getAllPosts } from '@/lib/posts'
+import { getPostsByPage } from '@/lib/posts'
 import NewsCard from '@/components/NewsCard'
+import Pagination from '@/components/Pagination'
 
 export default function HomePage() {
-  const posts = getAllPosts()
+  const { posts, totalPages } = getPostsByPage(1)
   const [latest, ...rest] = posts
 
   return (
@@ -36,6 +37,7 @@ export default function HomePage() {
           </div>
         </section>
       )}
+      <Pagination currentPage={1} totalPages={totalPages} />
     </div>
   )
 }

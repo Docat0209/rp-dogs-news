@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { formatPostDate } from '@/lib/posts'
+import { formatPostDate, getPostsByPage, ARTICLES_PER_PAGE } from '@/lib/posts'
 
 const FIXTURE_DIR = path.join(process.cwd(), 'tests', 'fixtures', 'news')
 
@@ -52,6 +52,23 @@ describe('getPost', () => {
     const fullPath = path.join(FIXTURE_DIR, 'test-article.md')
     const { content } = matter(fs.readFileSync(fullPath, 'utf8'))
     expect(content.trim()).toBe('正文內容在這裡。')
+  })
+})
+
+describe('getPostsByPage', () => {
+  it('returns at most ARTICLES_PER_PAGE posts per page', () => {
+    const { posts } = getPostsByPage(1)
+    expect(posts.length).toBeLessThanOrEqual(ARTICLES_PER_PAGE)
+  })
+
+  it('returns empty array for page beyond last page', () => {
+    const { posts } = getPostsByPage(99999)
+    expect(posts).toHaveLength(0)
+  })
+
+  it('totalPages is at least 1 when articles exist', () => {
+    const { totalPages } = getPostsByPage(1)
+    expect(totalPages).toBeGreaterThanOrEqual(1)
   })
 })
 
