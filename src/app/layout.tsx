@@ -14,6 +14,7 @@ const notoSerifTC = Noto_Serif_TC({
 export const metadata: Metadata = {
   metadataBase: new URL('https://rp-dogs-news.vercel.app'),
   title: "DOG'S NEWS | 台島新聞局",
+  icons: { icon: '/logo_round.png' },
   description: '台島新聞局 — 最新即時新聞報導',
   openGraph: {
     title: "DOG'S NEWS 台島新聞局",
