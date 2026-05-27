@@ -18,9 +18,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = getPost(slug)
   if (!post) return {}
+  const ogImage = post.cover ?? '/logo_trans.png'
   return {
     title: `${post.title} | DOG'S NEWS 台島新聞局`,
     description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      images: [{ url: ogImage, alt: post.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [ogImage],
+    },
   }
 }
 
@@ -66,6 +79,7 @@ export default async function ArticlePage({ params }: Props) {
             src={post.cover}
             alt={post.title}
             fill
+            sizes="(max-width: 768px) 100vw, 768px"
             className="object-cover"
             priority
           />

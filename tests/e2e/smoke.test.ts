@@ -48,6 +48,23 @@ test('article page renders markdown content with minute-level timestamp', async 
   await expect(page).toHaveURL('/')
 })
 
+test('article page has Open Graph and Twitter Card meta tags', async ({ page }) => {
+  await page.goto('/')
+  const firstLink = page.locator('a[href^="/news/"]').first()
+  const href = await firstLink.getAttribute('href')
+  await page.goto(href!)
+
+  const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content')
+  const ogDescription = await page.locator('meta[property="og:description"]').getAttribute('content')
+  const ogImage = await page.locator('meta[property="og:image"]').getAttribute('content')
+  const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute('content')
+
+  expect(ogTitle).toBeTruthy()
+  expect(ogDescription).toBeTruthy()
+  expect(ogImage).toMatch(/\.(jpg|jpeg|png|webp)|logo_trans/)
+  expect(twitterCard).toBe('summary_large_image')
+})
+
 test('footer shows single disclaimer and no extra virtual news mentions', async ({ page }) => {
   await page.goto('/')
   const footer = page.locator('footer')
