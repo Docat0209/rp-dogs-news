@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       type: 'article',
+      siteName: "DOG'S NEWS 台島新聞局",
       images: [{ url: ogImage, alt: post.title }],
     },
     twitter: {
