@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { formatPostDate, getPostsByPage, ARTICLES_PER_PAGE } from '@/lib/posts'
+import { formatPostDate, getPostsByPage, ARTICLES_PER_PAGE, ARTICLES_PER_PAGE_SUBSEQUENT } from '@/lib/posts'
 
 const FIXTURE_DIR = path.join(process.cwd(), 'tests', 'fixtures', 'news')
 
@@ -56,9 +56,17 @@ describe('getPost', () => {
 })
 
 describe('getPostsByPage', () => {
-  it('returns at most ARTICLES_PER_PAGE posts per page', () => {
+  it('page 1 returns at most ARTICLES_PER_PAGE (10) posts', () => {
     const { posts } = getPostsByPage(1)
     expect(posts.length).toBeLessThanOrEqual(ARTICLES_PER_PAGE)
+  })
+
+  it('page 2+ returns at most ARTICLES_PER_PAGE_SUBSEQUENT (9) posts', () => {
+    const { totalPages } = getPostsByPage(1)
+    if (totalPages >= 2) {
+      const { posts } = getPostsByPage(2)
+      expect(posts.length).toBeLessThanOrEqual(ARTICLES_PER_PAGE_SUBSEQUENT)
+    }
   })
 
   it('returns empty array for page beyond last page', () => {
@@ -69,6 +77,22 @@ describe('getPostsByPage', () => {
   it('totalPages is at least 1 when articles exist', () => {
     const { totalPages } = getPostsByPage(1)
     expect(totalPages).toBeGreaterThanOrEqual(1)
+  })
+
+  it('totalPages calculation: 19 articles → 2 pages, 20 articles → 3 pages', () => {
+    // Pure math verification independent of real content
+    function calcTotalPages(n: number): number {
+      return n <= ARTICLES_PER_PAGE
+        ? Math.max(1, Math.ceil(n / ARTICLES_PER_PAGE))
+        : 1 + Math.ceil((n - ARTICLES_PER_PAGE) / ARTICLES_PER_PAGE_SUBSEQUENT)
+    }
+    expect(calcTotalPages(0)).toBe(1)
+    expect(calcTotalPages(10)).toBe(1)
+    expect(calcTotalPages(11)).toBe(2)
+    expect(calcTotalPages(19)).toBe(2)
+    expect(calcTotalPages(20)).toBe(3)
+    expect(calcTotalPages(28)).toBe(3)
+    expect(calcTotalPages(29)).toBe(4)
   })
 })
 
