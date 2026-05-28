@@ -54,12 +54,17 @@ export function getPost(slug: string): Post | null {
 }
 
 export const ARTICLES_PER_PAGE = 10
+export const ARTICLES_PER_PAGE_SUBSEQUENT = 9
 
 export function getPostsByPage(page: number): { posts: PostMeta[]; totalPages: number } {
   const all = getAllPosts()
-  const totalPages = Math.max(1, Math.ceil(all.length / ARTICLES_PER_PAGE))
-  const start = (page - 1) * ARTICLES_PER_PAGE
-  return { posts: all.slice(start, start + ARTICLES_PER_PAGE), totalPages }
+  const totalPages =
+    all.length <= ARTICLES_PER_PAGE
+      ? Math.max(1, Math.ceil(all.length / ARTICLES_PER_PAGE))
+      : 1 + Math.ceil((all.length - ARTICLES_PER_PAGE) / ARTICLES_PER_PAGE_SUBSEQUENT)
+  const start = page === 1 ? 0 : ARTICLES_PER_PAGE + (page - 2) * ARTICLES_PER_PAGE_SUBSEQUENT
+  const count = page === 1 ? ARTICLES_PER_PAGE : ARTICLES_PER_PAGE_SUBSEQUENT
+  return { posts: all.slice(start, start + count), totalPages }
 }
 
 export function getAllSlugs(): string[] {

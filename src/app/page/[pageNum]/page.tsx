@@ -1,4 +1,4 @@
-import { getPostsByPage, getAllPosts, ARTICLES_PER_PAGE } from '@/lib/posts'
+import { getPostsByPage } from '@/lib/posts'
 import NewsCard from '@/components/NewsCard'
 import Pagination from '@/components/Pagination'
 import Link from 'next/link'
@@ -10,8 +10,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const all = getAllPosts()
-  const totalPages = Math.max(1, Math.ceil(all.length / ARTICLES_PER_PAGE))
+  const { totalPages } = getPostsByPage(1)
   return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => ({
     pageNum: String(i + 2),
   }))
