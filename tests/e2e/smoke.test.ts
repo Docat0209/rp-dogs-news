@@ -65,6 +65,23 @@ test('article page has Open Graph and Twitter Card meta tags', async ({ page }) 
   expect(twitterCard).toBe('summary_large_image')
 })
 
+test('page 2 shows at most 9 articles and pagination controls', async ({ page }) => {
+  await page.goto('/page/2')
+
+  // Page renders without 404
+  await expect(page).not.toHaveURL(/not-found/)
+  await expect(page).toHaveTitle(/第 2 頁/)
+
+  // Article grid renders with at most 9 cards
+  const articles = page.locator('article')
+  const count = await articles.count()
+  expect(count).toBeGreaterThan(0)
+  expect(count).toBeLessThanOrEqual(9)
+
+  // Pagination controls are visible
+  await expect(page.locator('nav[aria-label="pagination"]')).toBeVisible()
+})
+
 test('footer shows single disclaimer and no extra virtual news mentions', async ({ page }) => {
   await page.goto('/')
   const footer = page.locator('footer')

@@ -13,7 +13,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
   if (totalPages <= 1) return null
 
   return (
-    <div className="flex items-center justify-center gap-8 mt-10 pt-6 border-t border-gray-200">
+    <nav aria-label="pagination" className="flex items-center justify-center gap-8 mt-10 pt-6 border-t border-gray-200">
       {currentPage > 1 ? (
         <Link
           href={pageHref(currentPage - 1)}
@@ -37,6 +37,6 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
       ) : (
         <span className="text-sm font-medium text-gray-300 cursor-not-allowed">下一頁 →</span>
       )}
-    </div>
+    </nav>
   )
 }
