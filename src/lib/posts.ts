@@ -5,6 +5,11 @@ import type { Post, PostMeta } from '@/types/post'
 
 const contentDir = path.join(process.cwd(), 'content/news')
 
+function listMarkdownFiles(): string[] {
+  if (!fs.existsSync(contentDir)) return []
+  return fs.readdirSync(contentDir).filter(f => f.endsWith('.md'))
+}
+
 function normalizeDate(value: unknown): string {
   if (value instanceof Date) {
     // YAML auto-parsed a bare date — convert to "YYYY-MM-DD HH:MM" local-style string
@@ -15,9 +20,7 @@ function normalizeDate(value: unknown): string {
 }
 
 export function getAllPosts(): PostMeta[] {
-  const files = fs.readdirSync(contentDir)
-  return files
-    .filter(f => f.endsWith('.md'))
+  return listMarkdownFiles()
     .map(filename => {
       const slug = filename.replace(/\.md$/, '')
       const { data } = matter(fs.readFileSync(path.join(contentDir, filename), 'utf8'))
@@ -68,8 +71,7 @@ export function getPostsByPage(page: number): { posts: PostMeta[]; totalPages: n
 }
 
 export function getAllSlugs(): string[] {
-  const files = fs.readdirSync(contentDir)
-  return files.filter(f => f.endsWith('.md')).map(f => f.replace(/\.md$/, ''))
+  return listMarkdownFiles().map(f => f.replace(/\.md$/, ''))
 }
 
 /** Format a stored date string ("YYYY-MM-DD HH:MM" or "YYYY-MM-DD") for display */
