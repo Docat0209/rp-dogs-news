@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { pageNum } = await params
-  return { title: `第 ${pageNum} 頁 | DOG'S NEWS 台島新聞局` }
+  return { title: `第 ${pageNum} 頁 | DOG'S NEWS 海狗新聞局` }
 }
 
 export default async function NewsPage({ params }: Props) {

@@ -4,11 +4,11 @@ test('homepage loads with logo and latest article', async ({ page }) => {
   await page.goto('/')
 
   // Page title
-  await expect(page).toHaveTitle(/台島新聞局/)
+  await expect(page).toHaveTitle(/海狗新聞局/)
 
   // Header shows logo, Chinese name, and clock
-  await expect(page.getByAltText('DOG\'S NEWS 台島新聞局').first()).toBeVisible()
-  await expect(page.getByText('台島新聞局').first()).toBeVisible()
+  await expect(page.getByAltText('DOG\'S NEWS 海狗新聞局').first()).toBeVisible()
+  await expect(page.getByText('海狗新聞局').first()).toBeVisible()
   // Clock renders with HH:MM:SS pattern (font-mono tabular-nums element)
   const clock = page.locator('span.font-mono')
   await expect(clock).toBeVisible()
@@ -87,7 +87,7 @@ test('footer shows single disclaimer and no extra virtual news mentions', async 
   const footer = page.locator('footer')
 
   // Has copyright line
-  await expect(footer).toContainText('台島新聞局')
+  await expect(footer).toContainText('海狗新聞局')
 
   // Single disclaimer line
   const disclaimer = footer.getByText(/本站所有內容均為虛構/)

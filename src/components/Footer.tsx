@@ -11,17 +11,17 @@ export default function Footer() {
           <Link href="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity">
             <Image
               src="/logo_trans.png"
-              alt="DOG'S NEWS 台島新聞局"
+              alt="DOG'S NEWS 海狗新聞局"
               width={120}
               height={50}
               className="h-12 w-auto object-contain"
             />
             <div className="flex flex-col leading-tight border-l-2 border-[#CC0000] pl-4">
-              <span className="text-[#1A1A1A] font-black text-lg tracking-tight">台島新聞局</span>
+              <span className="text-[#1A1A1A] font-black text-lg tracking-tight">海狗新聞局</span>
               <span className="text-[#CC0000] text-xs font-bold tracking-[0.25em] uppercase">DOGSNEWS</span>
             </div>
           </Link>
-          <p className="text-gray-400 text-sm">© {year} DOG&apos;S NEWS 台島新聞局</p>
+          <p className="text-gray-400 text-sm">© {year} DOG&apos;S NEWS 海狗新聞局</p>
         </div>
       </div>
 

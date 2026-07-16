@@ -20,13 +20,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {}
   const ogImage = post.cover ?? '/logo_trans.png'
   return {
-    title: `${post.title} | DOG'S NEWS 台島新聞局`,
+    title: `${post.title} | DOG'S NEWS 海狗新聞局`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: 'article',
-      siteName: "DOG'S NEWS 台島新聞局",
+      siteName: "DOG'S NEWS 海狗新聞局",
       images: [{ url: ogImage, alt: post.title }],
     },
     twitter: {
@@ -69,7 +69,7 @@ export default async function ArticlePage({ params }: Props) {
           <span className="font-medium text-gray-700">{post.author}</span>
           <span>·</span>
           <time dateTime={post.date}>{dateLabel}</time>
-          <span>· 台島新聞局</span>
+          <span>· 海狗新聞局</span>
         </div>
       </header>
 
@@ -104,7 +104,7 @@ export default async function ArticlePage({ params }: Props) {
         </Link>
         <Image
           src="/logo_trans.png"
-          alt="台島新聞局"
+          alt="海狗新聞局"
           width={70}
           height={30}
           className="h-7 w-auto object-contain opacity-30"

@@ -13,20 +13,20 @@ const notoSerifTC = Noto_Serif_TC({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://rp-dogs-news.vercel.app'),
-  title: "DOG'S NEWS | 台島新聞局",
+  title: "DOG'S NEWS | 海狗新聞局",
   icons: { icon: '/logo_round.png' },
-  description: '台島新聞局 — 最新即時新聞報導',
+  description: '海狗新聞局 — 最新即時新聞報導',
   openGraph: {
-    title: "DOG'S NEWS 台島新聞局",
-    description: '台島新聞局 — 最新即時新聞報導',
+    title: "DOG'S NEWS 海狗新聞局",
+    description: '海狗新聞局 — 最新即時新聞報導',
     type: 'website',
-    siteName: "DOG'S NEWS 台島新聞局",
-    images: [{ url: '/logo_trans.png', width: 300, height: 126, alt: "DOG'S NEWS 台島新聞局" }],
+    siteName: "DOG'S NEWS 海狗新聞局",
+    images: [{ url: '/logo_trans.png', width: 300, height: 126, alt: "DOG'S NEWS 海狗新聞局" }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "DOG'S NEWS 台島新聞局",
-    description: '台島新聞局 — 最新即時新聞報導',
+    title: "DOG'S NEWS 海狗新聞局",
+    description: '海狗新聞局 — 最新即時新聞報導',
     images: ['/logo_trans.png'],
   },
 }
